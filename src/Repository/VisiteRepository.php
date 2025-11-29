@@ -1,6 +1,6 @@
 <?php
 
- namespace App\Repository;
+namespace App\Repository;
 
 use App\Entity\Visite;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -9,12 +9,6 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<Visite>
  */
-/**
- * @method Visite|null find($id,$lockMode = null,$lockVersion = null) 
- * @method Visite|null findOneBy(array $criteria, array $orderBy = null)
- * @method Visite[] findALL()
- * @method Visite[] findBy(array $criteria , array $orderBy = nulln $limit = null,$offset =null)
- */
 class VisiteRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -22,29 +16,19 @@ class VisiteRepository extends ServiceEntityRepository
         parent::__construct($registry, Visite::class);
     }
 
-    //    /**
-    //     * @return Visite[] Returns an array of Visite objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('v')
-    //            ->andWhere('v.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('v.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Visite
-    //    {
-    //        return $this->createQueryBuilder('v')
-    //            ->andWhere('v.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * Retourne toutes les visites triées sur un champ
+     * @param string $champ
+     * @param string $ordre
+     * @return Visite[]
+     */
+    public function findAllOrderBy($champ, $ordre): array
+    {
+        return $this->createQueryBuilder('v')
+            ->orderBy('v.' . $champ, $ordre)
+            ->getQuery()
+            ->getResult();
+    }
 }
+
 
