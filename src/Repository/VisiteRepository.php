@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository;
+ namespace App\Repository;
 
 use App\Entity\Visite;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -8,6 +8,12 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<Visite>
+ */
+/**
+ * @method Visite|null find($id,$lockMode = null,$lockVersion = null) 
+ * @method Visite|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Visite[] findALL()
+ * @method Visite[] findBy(array $criteria , array $orderBy = nulln $limit = null,$offset =null)
  */
 class VisiteRepository extends ServiceEntityRepository
 {
@@ -41,3 +47,4 @@ class VisiteRepository extends ServiceEntityRepository
     //        ;
     //    }
 }
+
