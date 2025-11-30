@@ -25,13 +25,15 @@ class Visite
     #[ORM\Column(length: 50)]
     private ?string $pays = null;
 
-    // ⭐ Ajout du champ note
     #[ORM\Column]
     private ?int $note = null;
 
-    // ⭐ Ajout du champ datecreation
     #[ORM\Column(type: 'datetime')]
     private ?\DateTimeInterface $datecreation = null;
+
+    // ⭐ Ajout du champ avis
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $avis = null;
 
     public function getId(): ?int
     {
@@ -82,7 +84,6 @@ class Visite
         return $this;
     }
 
-    // ⭐ Getter / Setter Note
     public function getNote(): ?int
     {
         return $this->note;
@@ -94,7 +95,6 @@ class Visite
         return $this;
     }
 
-    // ⭐ Getter / Setter Datecreation
     public function getDatecreation(): ?\DateTimeInterface
     {
         return $this->datecreation;
@@ -106,13 +106,25 @@ class Visite
         return $this;
     }
 
-    // ⭐ Méthode personnalisée pour afficher la date formatée
+    // ⭐ Formatage personnalisé de la date
     public function getDatecreationString(): string
     {
         if ($this->datecreation === null) {
             return "";
         }
         return $this->datecreation->format('d/m/Y');
+    }
+
+    // ⭐ Getter / Setter avis
+    public function getAvis(): ?string
+    {
+        return $this->avis;
+    }
+
+    public function setAvis(?string $avis): static
+    {
+        $this->avis = $avis;
+        return $this;
     }
 }
 
