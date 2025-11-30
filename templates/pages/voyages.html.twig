@@ -1,27 +1,38 @@
 {% extends "basefront.html.twig" %}
 
 {% block body %}
+
+    <h2 class="mb-4">Liste des voyages</h2>
+
     <table class="table table-striped">
         <thead>
             <tr>
-                <th class="text_left" scope="col">
+                <!-- Colonne Ville -->
+                <th class="text-left align-top" scope="col">
                     Ville
-                    <!-- Tri Ville ASC -->
-                    <a href="{{ path('voyages.sort', { champ: 'ville', ordre: 'ASC' }) }}">▲</a>
-                    <!-- Tri Ville DESC -->
-                    <a href="{{ path('voyages.sort', { champ: 'ville', ordre: 'DESC' }) }}">▼</a>
+                    <a href="{{ path('voyages.sort', { champ:'ville', ordre:'ASC' }) }}">▲</a>
+                    <a href="{{ path('voyages.sort', { champ:'ville', ordre:'DESC' }) }}">▼</a>
+
+                    <!-- Formulaire de filtre pour la VILLE -->
+                    <form class="form-inline mt-1" method="POST" action="{{ path('voyages.findallequal', { champ:'ville' }) }}">
+                        <div class="form-group ml-1 mb-2">
+                            <input type="text" class="sm" name="recherche" placeholder="Rechercher une ville">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm mb-2 ml-1">Filtrer</button>
+                    </form>
                 </th>
 
-                <th class="text-left" scope="col">Pays</th>
+                <!-- Colonne Pays (sans filtre) -->
+                <th class="text-left align-top" scope="col">Pays</th>
 
-                <th class="text-end" scope="col">Note</th>
+                <!-- Colonne Note -->
+                <th class="text-end align-top" scope="col">Note</th>
 
-                <th class="text-center" scope="col">
+                <!-- Colonne Date -->
+                <th class="text-center align-top" scope="col">
                     Date
-                    <!-- Tri Date ASC -->
-                    <a href="{{ path('voyages.sort', { champ: 'datecreation', ordre: 'ASC' }) }}">▲</a>
-                    <!-- Tri Date DESC -->
-                    <a href="{{ path('voyages.sort', { champ: 'datecreation', ordre: 'DESC' }) }}">▼</a>
+                    <a href="{{ path('voyages.sort', { champ:'datecreation', ordre:'ASC' }) }}">▲</a>
+                    <a href="{{ path('voyages.sort', { champ:'datecreation', ordre:'DESC' }) }}">▼</a>
                 </th>
             </tr>
         </thead>
@@ -30,18 +41,16 @@
             {% for visite in visites %}
                 <tr>
                     <td>
-                        <h5 class="text-primary">
-                            <a href="#">{{ visite.ville }}</a>
-                        </h5>
+                        <h5 class="text-primary mb-0">{{ visite.ville }}</h5>
                     </td>
 
                     <td>{{ visite.pays }}</td>
 
                     <td class="text-end">
                         {% if visite.note < 10 %}
-                            <div class="text-danger">{{ visite.note }}/20</div>
+                            <span class="text-danger">{{ visite.note }}/20</span>
                         {% else %}
-                            <div class="text-success">{{ visite.note }}/20</div>
+                            <span class="text-success">{{ visite.note }}/20</span>
                         {% endif %}
                     </td>
 
@@ -52,4 +61,5 @@
             {% endfor %}
         </tbody>
     </table>
+
 {% endblock %}
