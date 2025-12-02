@@ -38,7 +38,27 @@ class VisiteRepository extends ServiceEntityRepository
             ->getResult();
     }
 }
-
+    public function findAllOrdreBy(string $champ, string $ordre = 'DESC'): array
+    {
+        return $this->createQueryBuilder('v')
+                ->orderBy('v.' . $champ, $ordre)
+                ->getQuery()
+                ->getResult();
 }
+/** 
+ * Supprime unee visite
+ * @param Visite $visite
+ * @return void
+ */
+
+    public function remove(Visite $visite):void
+    {
+        $this->getEntityManager()->remove($visite);
+        $this->getEntityManager()->flush();
+    }
+}
+
+
+
 
 
