@@ -13,6 +13,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Visite;
+use App\Form\VisiteType;
+
+
 
  
 
@@ -50,5 +53,30 @@ class AdminVoyagesController  extends AbstractController{
 
         return $this->redirectToRoute('admin.voyages');
     }
+    #[Route('/admin/edit/{id}', name: 'admin.voyage.edit')]
+    public function edit(int $id, Request $request): Response
+    {
+    $visite = $this->repository->find($id);
 
+    if (!$visite) {
+        $this->addFlash('error', 'Visite introuvable.');
+        return $this->redirectToRoute('admin.voyages');
+    }
+
+    $formVisite = $this->createForm(VisiteType::class, $visite);
+    $formVisite->handleRequest($request);
+
+    if ($formVisite->isSubmitted() && $formVisite->isValid()) {
+        $this->repository->add($visite);
+        return $this->redirectToRoute('admin.voyages');
+    }
+
+    return $this->render("admin/admin.voyage.edit.html.twig", [
+        'visite' => $visite,
+        'formvisite' => $formVisite->createView()
+    ]);
+    }
+
+  
+    
 }
