@@ -23,7 +23,7 @@ class Environnement
 
     public function getNom(): ?string
     {
-        return $nom;
+        return $this-> nom;
     }
 
     public function setNom(string $nom): self

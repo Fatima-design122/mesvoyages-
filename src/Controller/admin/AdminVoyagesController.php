@@ -7,6 +7,9 @@
 
 namespace App\Controller\admin;
 
+use App\Entity\Environnement;
+use App\Repository\EnvironnementRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\VisiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Visite;
 use App\Form\VisiteType;
+
 
 
 
@@ -64,7 +68,7 @@ class AdminVoyagesController  extends AbstractController{
     }
 
     $formVisite = $this->createForm(VisiteType::class, $visite);
-    $formVisite->handleRequest($request);
+    $formVisite->handleRequest($request);   
 
     if ($formVisite->isSubmitted() && $formVisite->isValid()) {
         $this->repository->add($visite);
@@ -92,7 +96,6 @@ class AdminVoyagesController  extends AbstractController{
             'visite' => $visite,
             'formvisite' => $formVisite->createView()
         ]);
-    }
-    
-    
+     } 
+   
 }
