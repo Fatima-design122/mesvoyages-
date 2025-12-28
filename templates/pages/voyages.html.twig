@@ -21,13 +21,16 @@
                         <form class="form-inline mt-1" method="POST" action="{{ path('voyages.findallequal', { champ:'ville' }) }}">
                             <div class="form-group ml-1 mb-2">
                                 <input type="text" class="sm" name="recherche" placeholder="Rechercher une ville">
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-sm mb-2 ml-1">Filtrer</button>
+                                <input type="hidden" name="_token" value="{{ csrf_token('filtre_ville') }}">
+                                <button type="submit" class="btn btn-primary btn-sm mb-2 ml-1">Filtrer</button>
+                             </div>
                         </form>
                     </th>
 
                     <!-- Colonne Pays (sans filtre) -->
                     <th class="text-left align-top" scope="col">Pays</th>
+                    <input type="hidden" name="_token" value="{{ csrf_token('filtre_pays') }}">
+                    
 
                     <!-- Colonne Note -->
                     <th class="text-end align-top" scope="col">Note</th>

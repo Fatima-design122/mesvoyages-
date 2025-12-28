@@ -42,12 +42,15 @@ class VoyagesController extends AbstractController
     #[Route('/voyages/recherche/{champ}', name: 'voyages.findallequal')]
     public function findAllEqual(string $champ, Request $request): Response
     {
-        $valeur = $request->get("recherche");
-        $visites = $this->repository->findByEqualValue($champ, $valeur);
+        if($this->isCsrfTokenValid('filtre_'.$champ, $request->get('_token'))){
+            $valeur = $request->get("recherche");
+             $visites = $this->repository->findByEqualValue($champ, $valeur);
 
-        return $this->render("pages/voyages.html.twig", [
+            return $this->render("pages/voyages.html.twig", [
             'visites' => $visites
-        ]);
+            ]);
+        }
+        return $this->redirectToRoute("voyages");
     }
     #[Route('/voyages/voyage/{id}', name:'voyages.showone')]
     public function showOne($id): Response
