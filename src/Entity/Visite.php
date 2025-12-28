@@ -38,6 +38,9 @@ class Visite
 
     #[ORM\Column(type: 'datetime')]
     private ?\DateTimeInterface $datecreation = null;
+    
+    #[ORM\Column(type:'datetime', nullable: true)]
+    private ?\DateTimeInterface $dateDepart=null;
 
     // ⭐ Ajout du champ avis
     #[ORM\Column(type: 'text', nullable: true)]
@@ -123,6 +126,17 @@ class Visite
     {
         $this->datecreation = $datecreation;
         return $this;
+    }
+    
+    public function getDateDepart():?\DateTimeInterface
+    {
+        return $this->dateDepart;
+    }
+    
+    public function setDateDepart(?\DateTieInterface $dateDepart): static 
+    {
+        $this->dateDepart =$dateDepart;
+        return $this;          
     }
 
     // ⭐ Formatage personnalisé de la date

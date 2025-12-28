@@ -6,6 +6,7 @@ use App\Entity\Visite;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 /**
  * @extends ServiceEntityRepository<Visite>
  */
@@ -68,7 +69,14 @@ class VisiteRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
  
-        
+    public function findLastVoyages(int $limit = 2):array
+    {
+        return $this->createQueryBuilder('v')
+                ->orderBy('v.dateDepart', 'DESC')
+                ->setMaxResults($limit)
+                ->getQuery()
+                ->getResult();
+    }
 }
 
 
