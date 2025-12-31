@@ -133,7 +133,7 @@ class Visite
         return $this->dateDepart;
     }
     
-    public function setDateDepart(?\DateTieInterface $dateDepart): static 
+    public function setDateDepart(?\DateTimeInterface $dateDepart): static 
     {
         $this->dateDepart =$dateDepart;
         return $this;          

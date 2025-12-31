@@ -11,6 +11,8 @@ use App\Repository\VisiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route; 
+use App\Entity\Visite;
+
 /**
  * Description of AccueilController
  *
@@ -27,11 +29,11 @@ class AccueilController  extends AbstractController{
         ]);
     }
     
-    #[Route('/voyage/{id}', name: 'app_voyage_show')]
+    #[Route('/voyage/{id}', name: 'voyage.showone')]
     public function show(Visite $voyage): Response
     {
-        return $this->render('pages/voyage_show.html.twig', [
-            'voyage' => $voyage,
+        return $this->render('pages/voyage.html.twig', [
+            'visite' => $voyage,
         ]);
     }
 

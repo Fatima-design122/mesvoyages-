@@ -56,6 +56,11 @@ class VoyagesController extends AbstractController
     public function showOne($id): Response
     {
         $visite = $this->repository->find($id);
+        if (!$visite) {
+            throw $this->createNotFoundException('Visite non trouvée.');
+            
+        }
+
 
         return $this->render("pages/voyage.html.twig", [
             'visite' => $visite
