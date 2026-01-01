@@ -13,8 +13,9 @@ class Environnement
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]  // ajoute cette ligne pour le champ "nom"
+    #[ORM\Column(length: 255)]
     private ?string $nom = null;
+
 
     public function getId(): ?int
     {
@@ -23,7 +24,7 @@ class Environnement
 
     public function getNom(): ?string
     {
-        return $this-> nom;
+        return $this->nom;
     }
 
     public function setNom(string $nom): self

@@ -33,7 +33,7 @@
         <div class="voyage">
             <img src="/uploads/visites/{{ voyage.imageName }}" alt="Image du voyage">
 
-            <p><strong>{{ voyage.dateDepart|date('d/m/Y') }}</strong></p>
+            <p><strong>{{ voyage.datecreation|date('d/m/Y') }}</strong></p>
 
             <h3>
                 <a href="{{ path('voyages.showone', { id: voyage.id }) }}">
@@ -47,7 +47,7 @@
 
             <p>
                 <strong>Environnements :</strong>
-                {% for env in voyage.environnements %}
+                {% for env in voyage.environnements%}
                     {{ env.nom }}{% if not loop.last %}, {% endif %}
                 {% else %}
                     Aucun

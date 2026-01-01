@@ -62,7 +62,7 @@ class VoyagesController extends AbstractController
         }
 
 
-        return $this->render("pages/voyage.html.twig", [
+        return $this->render("pages/voyages.html.twig", [
             'visite' => $visite
         ]);
     }

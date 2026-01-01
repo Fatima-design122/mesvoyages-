@@ -72,7 +72,7 @@ class VisiteRepository extends ServiceEntityRepository
     public function findLastVoyages(int $limit = 2):array
     {
         return $this->createQueryBuilder('v')
-                ->orderBy('v.dateDepart', 'DESC')
+                ->orderBy('v.datecreation', 'DESC')
                 ->setMaxResults($limit)
                 ->getQuery()
                 ->getResult();
