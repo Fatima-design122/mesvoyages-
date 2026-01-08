@@ -1,0 +1,82 @@
+{% extends "basefront.html.twig" %}
+
+{% block body %}
+
+<h2>Bienvenue sur mon site personnel de présentation de mes voyages.</h2>
+
+<p>
+    Dans la partie <a href="{{ path('voyages') }}">Voyages</a>, vous pouvez voir la liste des visites
+    que j'ai faites dans différentes villes.
+</p>
+
+<p>
+    À chaque fois j'ai précisé la ville visitée, le pays, j'ai mis une note (entre 0 et 20)
+    et il y a aussi la date de la visite.
+</p>
+
+<p>
+    En cliquant sur la ville de la visite, vous pourrez avoir plus d'informations dessus :
+    températures min et max, description, environnements et une photo.
+</p>
+
+<p>
+    Enfin, vous pouvez me contacter avec le formulaire de
+    <a href="{{ path('contact') }}">Contact</a>.
+</p>
+
+<hr>
+
+<h2>Voici mes 2 derniers voyages :</h2>
+
+<div class="row mt-4">
+    {% for visite in visites %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                {% if visite.imageName %}
+                    <img src="{{ asset('images/visites/'~ visite.imageName) }}" 
+                        style="width:100%;height:auto;" 
+                        alt="{{ visite.ville }}">
+                {% else %}
+                    <img src="{{ asset('images/no-image.png') }}" 
+                        style="width:100%;height:auto;" 
+                        alt="Aucune image">
+                {% endif %}
+
+
+
+
+                <div class="card-body">
+                    <p class="fw-bold">
+                        {{ visite.datecreation|date('d/m/Y') }}
+                    </p>
+
+                    <h5 class="card-title">
+                        <a href="{{ path('voyages.showone', { id: visite.id }) }}">
+                            {{ visite.ville }}
+                        </a>
+                    </h5>
+
+                    <p class="card-text">{{ visite.pays }}</p>
+                    <p class="card-text">{{ visite.note }}/20</p>
+                    <p class="card-text">
+                        t° entre {{ visite.tempmin }}° et {{ visite.tempmax }}°
+                    </p>
+
+                    <p class="card-text">
+                        <strong>Environnements :</strong>
+                        {% for env in visite.environnements %}
+                            {{ env.nom }}{% if not loop.last %}, {% endif %}
+                        {% else %}
+                            Aucun
+                        {% endfor %}
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    {% else %}
+        <p>Aucun voyage trouvé</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "basefront.html.twig" %}
+
+{% block body %}
+
+    
+    <h2 class="mb-4">Liste des voyages</h2>
+
+    {# Si aucune visite fournie, on affiche un message #}
+    {% if visites is not defined or visites|length == 0 %}
+        <div class="alert alert-info">Aucun voyage trouvé.</div>
+    {% else %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <!-- Colonne Ville -->
+                    <th class="text-left align-top" scope="col">
+                        Ville
+                        <a href="{{ path('voyages.sort', { champ:'ville', ordre:'ASC' }) }}">▲</a>
+                        <a href="{{ path('voyages.sort', { champ:'ville', ordre:'DESC' }) }}">▼</a>
+
+                        <!-- Formulaire de filtre pour la VILLE -->
+                        <form class="form-inline mt-1" method="POST" action="{{ path('voyages.findallequal', { champ:'ville' }) }}">
+                            <div class="form-group ml-1 mb-2">
+                                <input type="text" class="sm" name="recherche" placeholder="Rechercher une ville">
+                                <input type="hidden" name="_token" value="{{ csrf_token('filtre_ville') }}">
+                                <button type="submit" class="btn btn-primary btn-sm mb-2 ml-1">Filtrer</button>
+                             </div>
+                        </form>
+                    </th>
+
+                    <!-- Colonne Pays (sans filtre) -->
+                    <th class="text-left align-top" scope="col">Pays</th>
+                    <input type="hidden" name="_token" value="{{ csrf_token('filtre_pays') }}">
+                    
+
+                    <!-- Colonne Note -->
+                    <th class="text-end align-top" scope="col">Note</th>
+
+                    <!-- Colonne Date -->
+                    <th class="text-center align-top" scope="col">
+                        Date
+                        <a href="{{ path('voyages.sort', { champ:'datecreation', ordre:'ASC' }) }}">▲</a>
+                        <a href="{{ path('voyages.sort', { champ:'datecreation', ordre:'DESC' }) }}">▼</a>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {# utilisation de visites|default([]) pour être sûr #}
+                {% for visite in visites%}
+                    <tr>
+                        <td>
+                            <h5 class="text-primary mb-0">
+                                <a href="{{ path('voyages.showone', { id: visite.id }) }}">
+                                    {{ visite.ville }}
+                                </a>
+                            </h5>
+                        </td>
+
+                        <td>{{ visite.pays }}</td>
+
+                        <td class="text-end">
+                            {% if visite.note is defined and visite.note < 10 %}
+                                <span class="text-danger">{{ visite.note }}/20</span>
+                            {% elseif visite.note is defined %}
+                                <span class="text-success">{{ visite.note }}/20</span>
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td class="text-center">
+                            {# si tu as une propriété datecreationstring #}
+                            {{ visite.datecreationstring|default('-') }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+{% endblock %}
