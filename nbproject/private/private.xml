@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/wamp64/www/mesvoyages/src/Entity/Contact.php</file>
+            <file>file:/C:/wamp64/www/mesvoyages/templates/pages/_email.html.twig</file>
+            <file>file:/C:/wamp64/www/mesvoyages/templates/pages/voyage.html.twig</file>
+            <file>file:/C:/wamp64/www/mesvoyages/.env</file>
+            <file>file:/C:/wamp64/www/mesvoyages/templates/pages/contact.html.twig</file>
+            <file>file:/C:/wamp64/www/mesvoyages/templates/pages/voyages.html.twig</file>
+            <file>file:/C:/wamp64/www/mesvoyages/src/Form/ContactType.php</file>
+            <file>file:/C:/wamp64/www/mesvoyages/templates/pages/accueil.html.twig</file>
+            <file>file:/C:/wamp64/www/mesvoyages/config/packages/mailer.yaml</file>
+            <file>file:/C:/wamp64/www/mesvoyages/src/Controller/ContactController.php</file>
+            <file>file:/C:/wamp64/www/mesvoyages/src/Entity/Visite.php</file>
+            <file>file:/C:/wamp64/www/mesvoyages/src/Form/VisiteType.php</file>
+        </group>
+    </open-files>
+</project-private>
