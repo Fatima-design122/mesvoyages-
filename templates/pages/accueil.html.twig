@@ -32,16 +32,11 @@
     {% for visite in visites %}
         <div class="col-md-6 mb-4">
             <div class="card h-100">
-                {% if visite.imageName %}
-                    <img src="{{ asset('images/visites/'~ visite.imageName) }}" 
-                        style="width:100%;height:auto;" 
-                        alt="{{ visite.ville }}">
-                {% else %}
-                    <img src="{{ asset('images/no-image.png') }}" 
-                        style="width:100%;height:auto;" 
-                        alt="Aucune image">
+                
+                {% if visite.imagename %}
+                    <img src="{{ app.request.getBasePath()~vich_uploader_asset(visite, 'imageFile') }}" 
+                         class="card-img-top" alt="image du voyage" style="width:100%;height:auto;">
                 {% endif %}
-
 
 
 
